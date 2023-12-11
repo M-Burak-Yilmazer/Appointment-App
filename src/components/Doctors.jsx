@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const Doctors = () => {
   const [show, setShow] = useState(false);
+  const [drName, setDrName] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,7 +20,10 @@ const Doctors = () => {
         {doctorData.map(({ id, name, dep, img }) => (
           <Col key={id}>
             <img
-              onClick={handleShow}
+              onClick={() => {
+                handleShow();
+                setDrName(name);
+              }}
               src={img}
               className="img-thumbnail doctor-img"
               alt=""
@@ -29,7 +33,7 @@ const Doctors = () => {
           </Col>
         ))}
       </Row>
-      <AddModal handleClose={handleClose} show={show} />
+      <AddModal handleClose={handleClose} show={show} drName={drName} />
     </Container>
   );
 };
